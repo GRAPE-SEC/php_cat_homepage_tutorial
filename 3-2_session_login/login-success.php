@@ -1,7 +1,9 @@
 <?php
+session_save_path('./');
+session_start();
 
 // Check if the user is logged in
-if (!isset($_COOKIE["user"])) {
+if (!isset($_SESSION["username"])) {
     // If not logged in, redirect to the login page
     header("Location: goback.php");
     exit();

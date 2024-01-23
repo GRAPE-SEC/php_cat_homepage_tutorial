@@ -1,3 +1,10 @@
+<?php
+if (!isset($_COOKIE["user"])) {
+    header("Location: goback.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

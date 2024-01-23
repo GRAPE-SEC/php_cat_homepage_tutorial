@@ -1,23 +1,17 @@
 <?php
 
-// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the entered username and password
+
     $enteredUsername = $_POST["username"];
     $enteredPassword = $_POST["password"];
 
-    // Replace the following with your actual username and password validation logic
-    $validUsername = "grapehacker";
+    $validUsername = "grapeuser";
     $validPassword = "secret1234";
 
-    // Check if the entered credentials are valid
     if ($enteredUsername == $validUsername && $enteredPassword == $validPassword) {
-        // Redirect to the login success page
 
-        // 쿠키 설정
-        setcookie("user", "John Doe", time() + 3600, "/");
+        setcookie("user", "grapehacker_cookie", time() + 3600, "/");
 
-        // 쿠키가 설정되었는지 확인
         if (isset($_COOKIE["user"])) {
             echo "쿠키 'user'의 값: " . $_COOKIE[$validUsername];
         } else {
@@ -27,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
 
     } else {
-        // Invalid credentials, you might want to display an error message
         $errorMessage = "Invalid username or password";
     }
 }

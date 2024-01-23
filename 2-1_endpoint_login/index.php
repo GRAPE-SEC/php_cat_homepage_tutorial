@@ -1,3 +1,31 @@
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $enteredUsername = $_POST["username"];
+    $enteredPassword = $_POST["password"];
+
+    $validUsername = "grapeuser";
+    $validPassword = "secret1234";
+
+    if ($enteredUsername == $validUsername and $enteredPassword == $validPassword) {
+
+	setcookie("user", "grapehacker_cookie", time() + 3600, "/");
+
+	if (!isset($_COOKIE["user"])) {
+            echo "Cookie Value 'user': " . $_COOKIE[$validUsername];
+        } else {
+            echo "there is no cookie!";
+        }
+
+        header("Location: login-success.php");
+        exit();
+    } else {
+        $errorMessage = "Invalid username or password";
+    }
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +121,12 @@
 
         <form method="post">
             <h2>Login</h2>
-
+	<?php
+            // Display error message if any
+            if (isset($errorMessage)) {
+                echo '<p style="color: red;">' . $errorMessage . '</p>';
+            }
+	?>	
             <label for="username">Username:</label>
             <input type="text" name="username" required>
 

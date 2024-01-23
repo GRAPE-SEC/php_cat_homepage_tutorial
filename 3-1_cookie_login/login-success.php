@@ -1,10 +1,5 @@
 <?php
-session_save_path('./');
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION["username"])) {
-    // If not logged in, redirect to the login page
+if (!isset($_COOKIE["user"])) {
     header("Location: goback.php");
     exit();
 }
@@ -97,14 +92,16 @@ if (!isset($_SESSION["username"])) {
 <body>
 
     <header>
-        <h1>네이버</h1>
-        <h1>Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
+        <h1>개인 페이지</h1>
         <a href="logout.php"><h1>Logout</h1></a>
     </header>
 
     <main>
-        <h2>Here is Cat!</h2>
+        <h2>안녕하세요 당신의 개인페이지입니다.</h2>
         <img src="https://placekitten.com/200/200" alt="고양이 사진">
+        <h3><나의 고양이> </h3>
+        <h3>전화번호 : 010-1234-1234<h3>
+        <h3>계좌번호 : 12341234<h3>    
     </main>
 
     <footer>
