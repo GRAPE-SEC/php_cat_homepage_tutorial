@@ -1,31 +1,14 @@
 <?php
+session_save_path('./');
+session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $enteredUsername = $_POST["username"];
-    $enteredPassword = $_POST["password"];
-
-    $validUsername = "grapeuser";
-    $validPassword = "secret1234";
-
-    if ($enteredUsername == $validUsername && $enteredPassword == $validPassword) {
-
-        setcookie("user", "grapehacker_cookie", time() + 3600, "/");
-
-        if (isset($_COOKIE["user"])) {
-            echo "쿠키 'user'의 값: " . $_COOKIE[$validUsername];
-        } else {
-            echo "쿠키가 설정되지 않았습니다.";
-        }
-        header("Location: login-success.php");
-        exit();
-
-    } else {
-        $errorMessage = "Invalid username or password";
-    }
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    echo "Welcome, you are logged in.";
+} else {
+    echo "Please log in.";
 }
-?>
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         header {
-            background-color: #DE628B;
+            background-color: #333;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -81,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         input[type="submit"] {
-            background-color: #DE628B;
+            background-color: #333;
             color: #fff;
             cursor: pointer;
             padding: 12px;
@@ -95,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         footer, nav {
-            background-color: #DE628B;
+            background-color: #333;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -114,32 +97,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
     <header>
-        <h1>GRAPE 고양이 웹</h1>
+        <h1>개인 페이지</h1>
+        <a href="logout.php"><h1>Logout</h1></a>
     </header>
 
     <main>
-
-        <form method="post">
-
-        <?php
-            // Display error message if any
-            if (isset($errorMessage)) {
-                echo '<p style="color: red;">' . $errorMessage . '</p>';
-            }
-        ?>
-            <h2>Login</h2>
-
-            <label for="username">Username:</label>
-            <input type="text" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
-
-            <input type="submit" value="Login">
-        </form>
-
-        <h2>Welcome to Your Website hello</h2>
-        <p>This is a sample content for your website.</p>
+        <h2>안녕하세요 당신의 개인페이지입니다.</h2>
+        <img src="https://placekitten.com/200/200" alt="고양이 사진">
+        <h3><나의 고양이> </h3>
+        <h3>전화번호 : 010-1234-1234<h3>
+        <h3>계좌번호 : 12341234<h3>    
     </main>
 
     <footer>

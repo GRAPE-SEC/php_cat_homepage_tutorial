@@ -1,12 +1,36 @@
-<!--page-babo.php -->
 <?php
-if ($_COOKIE["user"]=="babo_dg") {
-    echo "login success!";
-} else {
-    header("Location: goback.php");
-    exit();
+session_save_path('./');
+session_start();
+
+// SQLite 데이터베이스 연결
+$db = new SQLite3('cat_homepage.db');
+
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the entered username and password
+    $enteredUsername = $_POST["username"];
+    $enteredPassword = $_POST["password"];
+
+    // Query to check user credentials
+    $query = "SELECT * FROM users WHERE username='{$enteredUsername}' AND password='{$enteredPassword}' ";
+    $result = $db->query($query);
+    $row = $result->fetchArray();
+
+    // Check if the entered credentials are valid
+    if ($row) {
+        // Redirect to the login success page
+        $login_user = $row["username"];
+        $_SESSION["user"] = $login_user;
+        header("Location: page-{$login_user}.php");
+        exit();
+    } else {
+        // Invalid credentials, you might want to display an error message
+        $errorMessage = "Invalid username or password";
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +50,7 @@ if ($_COOKIE["user"]=="babo_dg") {
         }
 
         header {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -62,7 +86,7 @@ if ($_COOKIE["user"]=="babo_dg") {
         }
 
         input[type="submit"] {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             cursor: pointer;
             padding: 12px;
@@ -76,7 +100,7 @@ if ($_COOKIE["user"]=="babo_dg") {
         }
 
         footer, nav {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -95,16 +119,31 @@ if ($_COOKIE["user"]=="babo_dg") {
 <body>
 
     <header>
-        <h1>개인 페이지</h1>
-        <a href="logout.php"><h1>Logout</h1></a>
+        <h1>GRAPE 고양이 웹</h1>
     </header>
 
     <main>
-        <h2>안녕하세요 바보의 개인페이지입니다.</h2>
-        <img src="https://item.kakaocdn.net/do/49a292677e5b578a8985bb315c19700c960f4ab09fe6e38bae8c63030c9b37f9" alt="바보">
-        <h3><나의 사진> </h3>
-        <h3>전화번호 : 010-TTTT-TTTT<h3>
-        <h3>계좌번호 : 강아지은행 BBB-BBB-BBB<h3>    
+
+        <form method="post">
+
+        <?php
+            if (isset($errorMessage)) {
+                echo '<p style="color: red;">' . $errorMessage . '</p>';
+            }
+        ?>
+            <h2>Login</h2>
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+
+        <h2>Welcome to Your Website hello</h2>
+        <p>This is a sample content for your website.</p>
     </main>
 
     <footer>

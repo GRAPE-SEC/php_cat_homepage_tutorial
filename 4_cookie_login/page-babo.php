@@ -1,10 +1,9 @@
+<!--page-babo.php -->
 <?php
-session_save_path('./');
-session_start();
-// 사용자가 이미 로그인되어 있는지 확인
-if (isset($_SESSION["username"])) {
-    // 이미 로그인된 경우, login-success.php 페이지로 리디렉션
-    header("Location: login-success.php");
+if ($_COOKIE["user"]=="babo_cookie") {
+    echo "login success!";
+} else {
+    header("Location: goback.php");
     exit();
 }
 ?>
@@ -15,7 +14,7 @@ if (isset($_SESSION["username"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>grape cat web</title>
 
     <style>
         body {
@@ -96,32 +95,16 @@ if (isset($_SESSION["username"])) {
 <body>
 
     <header>
-        <h1>네이버</h1>
+        <h1>개인 페이지</h1>
+        <a href="logout.php"><h1>Logout</h1></a>
     </header>
 
     <main>
-
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-
-        <?php
-            // Display error message if any
-            if (isset($errorMessage)) {
-                echo '<p style="color: red;">' . $errorMessage . '</p>';
-            }
-        ?>
-            <h2>Login</h2>
-
-            <label for="username">Username:</label>
-            <input type="text" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
-
-            <input type="submit" value="Login">
-        </form>
-
-        <h2>Welcome to Your Website hello</h2>
-        <p>This is a sample content for your website.</p>
+        <h2>안녕하세요 바보의 개인페이지입니다.</h2>
+        <img src="https://item.kakaocdn.net/do/49a292677e5b578a8985bb315c19700c960f4ab09fe6e38bae8c63030c9b37f9" alt="바보">
+        <h3><나의 사진> </h3>
+        <h3>전화번호 : 010-TTTT-TTTT<h3>
+        <h3>계좌번호 : 강아지은행 BBB-BBB-BBB<h3>    
     </main>
 
     <footer>

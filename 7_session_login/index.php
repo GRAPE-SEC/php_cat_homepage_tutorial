@@ -1,5 +1,7 @@
-<!-- index.php -->
 <?php
+
+session_save_path('./');
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -13,11 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $baboPassword = "babo1234";
 
     if ($enteredUsername == $grapeUsername && $enteredPassword == $grapePassword) {
-        setcookie("user", "grape_bs", time() + 3600, "/");
+        $_SESSION['user'] = "grape";
         header("Location: page-grape.php");
         exit();
     } elseif($enteredUsername == $baboUsername && $enteredPassword  == $baboPassword){
-        setcookie("user", "babo_dg", time() + 3600, "/");
+        $_SESSION['user'] = "babo";
         header("Location: page-babo.php");
         exit();
     } else {
@@ -33,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>grape cat web</title>
 
     <style>
         body {
@@ -122,7 +124,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post">
 
         <?php
-            // Display error message if any
             if (isset($errorMessage)) {
                 echo '<p style="color: red;">' . $errorMessage . '</p>';
             }

@@ -1,10 +1,11 @@
+<!--page-babo.php -->
 <?php
 session_save_path('./');
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION["username"])) {
-    // If not logged in, redirect to the login page
+if (isset($_SESSION['user']) && $_SESSION['user'] == 'babo') {
+    echo "login success!";
+} else {
     header("Location: goback.php");
     exit();
 }
@@ -16,7 +17,7 @@ if (!isset($_SESSION["username"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>grape cat web</title>
 
     <style>
         body {
@@ -102,11 +103,11 @@ if (!isset($_SESSION["username"])) {
     </header>
 
     <main>
-        <h2>안녕하세요 당신의 개인페이지입니다.</h2>
-        <img src="https://placekitten.com/200/200" alt="고양이 사진">
-        <h3><나의 고양이> </h3>
-        <h3>전화번호 : 010-1234-1234<h3>
-        <h3>계좌번호 : 12341234<h3>    
+        <h2>안녕하세요 바보의 개인페이지입니다.</h2>
+        <img src="https://item.kakaocdn.net/do/49a292677e5b578a8985bb315c19700c960f4ab09fe6e38bae8c63030c9b37f9" alt="바보">
+        <h3><나의 사진> </h3>
+        <h3>전화번호 : 010-TTTT-TTTT<h3>
+        <h3>계좌번호 : 강아지은행 BBB-BBB-BBB<h3>    
     </main>
 
     <footer>

@@ -2,8 +2,8 @@
 
     $db = new SQLite3('cat_homepage.db');
 
-    $enteredUsername = "grapehacker";
-    $enteredPassword = "secret1234";
+    $enteredUsername = "babo'--";
+    $enteredPassword = "asdf";
 
     // Query to check user credentials
     $query = "SELECT * FROM users WHERE username='{$enteredUsername}' AND password='{$enteredPassword}' ";
@@ -14,12 +14,21 @@
     echo "your query : $query";
     echo "<br>";
     
+    $row = $result->fetchArray();
 
-    if ($result->fetchArray()) {
+    echo "row : $row <br>";
+    echo "<br>";
+    
+    echo "row['username'] : {$row['username']} <br>";
+    echo "row['password'] : {$row['password']} <br>";
+
+    echo "<br>";
+
+    if ($row) {
         echo "this is on database : $enteredUsername/$enteredPassword";
         echo $result->fetchArray();
     }else{
-        echo "CAUTION not in database : $enteredUsername/$enteredPassword";
+        echo "not in database : $enteredUsername/$enteredPassword";
     }
 
 ?>

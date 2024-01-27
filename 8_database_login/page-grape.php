@@ -1,10 +1,24 @@
+<!--page-grape.php -->
+<?php
+session_save_path('./');
+session_start();
+
+if (isset($_SESSION['user']) && $_SESSION['user'] == 'grape') {
+    echo "login success!";
+} else {
+    header("Location: goback.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>grape cat web</title>
 
     <style>
         body {
@@ -90,11 +104,11 @@
     </header>
 
     <main>
-        <h2>안녕하세요 당신의 개인페이지입니다.</h2>
-        <img src="https://placekitten.com/200/200" alt="고양이 사진">
-        <h3><나의 고양이> </h3>
-        <h3>전화번호 : 010-1234-1234<h3>
-        <h3>계좌번호 : 12341234<h3>    
+        <h2>안녕하세요 grape 의 개인페이지입니다.</h2>
+        <img src="https://img.segye.com/content/image/2017/08/30/20170830515039.jpg" alt="포도 사진">
+        <h3><나의 사진> </h3>
+        <h3>전화번호 : 010-XXXX-XXXX<h3>
+        <h3>계좌번호 : 고양이은행 MMM-MMM-MMM<h3>    
     </main>
 
     <footer>
